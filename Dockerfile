@@ -1,7 +1,9 @@
-FROM phusion/baseimage:latest
-    LABEL org.opencontainers.image.authors="j.j.m.vansteenbrugge@umcutrecht.nl"
+FROM continuumio/miniconda3
+LABEL org.opencontainers.image.authors="j.j.m.vansteenbrugge@umcutrecht.nl"
+LABEL org.opencontainers.image.source https://github.com/UMCUGenetics/pypgx
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python python-pip
 
-RUN pip install .
+RUN apt update && apt install -y build-essential
+
+COPY ./ ./app 
+RUN pip install ./app
